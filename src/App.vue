@@ -12,9 +12,12 @@ export default {
     HelloWorld
   },
   methods: {
-    name (params: String) {
+    getName (params: String) {
       console.log(params)
     }
+  },
+  created () {
+    this.getName('asue')
   }
 }
 </script>
