@@ -14,6 +14,7 @@ export default {
     getName (params: String) {
       console.log(params)
       console.log('params1')
+      console.log('params2')
     }
   },
   created () {
