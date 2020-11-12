@@ -13,6 +13,7 @@ export default {
   methods: {
     getName (params: String) {
       console.log(params)
+      console.log('params1')
     }
   },
   created () {
