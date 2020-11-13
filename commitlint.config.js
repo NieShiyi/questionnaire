@@ -1,4 +1,16 @@
 /* eslint-disable no-irregular-whitespace */
+
+/**
+ * 提交格式如下：
+ * <type>(<scope>): <subject>
+ * // 空行
+ * <BLANK LINE>
+ * <body>
+ * // 空行
+ * <BLANK LINE>
+ * <footer></footer>
+*/
+
 module.exports = {
   extends: ['@commitlint/config-conventional'],
   rules: {
@@ -16,7 +28,7 @@ module.exports = {
       'build' // 打包
     ]],
     // subject 大小写不做校验
-    // 自动部署的BUILD ROBOT的commit信息大写，以作区别
+    // 自动部署的BUILD ROBOT的commit信息大写，自己提交的英文小写，以作区别
     'subject-case': [0]
   }
 }
