@@ -13,11 +13,6 @@ export default {
   methods: {
     getName (params: String) {
       console.log(params)
-      console.log('params1')
-      console.log('params2')
-      console.log('params3')
-      console.log('params4')
-      console.log('params5')
     }
   },
   created () {
