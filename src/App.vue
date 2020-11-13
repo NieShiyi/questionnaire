@@ -17,6 +17,7 @@ export default {
       console.log('params2')
       console.log('params3')
       console.log('params4')
+      console.log('params5')
     }
   },
   created () {
