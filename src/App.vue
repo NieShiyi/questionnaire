@@ -1,19 +1,21 @@
 <template>
   <HelloWorld msg="Hello Vue 3.0 + Vite~" />
+  <Tree />
 </template>
 
 <script lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+import Tree from './components/Tree.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Tree
   },
   methods: {
     getName (params: String) {
       console.log(params)
-      console.log('1')
     }
   },
   created () {
