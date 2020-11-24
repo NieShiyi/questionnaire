@@ -1,6 +1,6 @@
 const path = require('path')
-const resolve = function (dir) {
-  return path.join(__dirname, dir) // path.join(__dirname)设置绝对路径
+function resolve (dir) {
+  return path.join(__dirname, dir)// path.join(__dirname)设置绝对路径
 }
 const baseUrl = 'https://www.fastmock.site/mock/c9158f30b6bdc106c2cd2d07130e1676' // 设置代理路径
 
@@ -59,15 +59,21 @@ module.exports = {
   productionSourceMap: true,
 
   // 调整内部的 webpack 配置。
-  // 查阅 https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/webpack.md
   chainWebpack: config => {
+    // 配置别名不起作用 TODO
     config.resolve.alias
       .set('@', resolve('src')) // src 路径
-      .set('@api', resolve('src/api')) // 公共api路径
-      .set('@assets', resolve('src/assets')) // 公共 assets 路径
-      .set('@utils', resolve('src/utils')) // 公共 utils 路径
-      .set('@components', resolve('src/components')) // 公共组件路径
+
+    Object.assign(config, {
+      resolve: {
+        extensions: ['.vue', '.ts', '.js', '.json'], // 可以省略后缀名
+        alias: { // 别名,在require的时候，可以使用这些别名，来缩短路径的长度
+          '@': path.resolve(__dirname, './src')
+        }
+      }
+    })
   },
+
   configureWebpack: () => {
 
   },

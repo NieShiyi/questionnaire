@@ -1,8 +1,23 @@
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+/* 定义全局css变量 */
+
+:root {
+    /* 背景色 */
+    --bj-white: #ffffff;
+    --bj-black: #000000;
+    --bj-thin-black: #121212;
+    --bj-gray: #f9f9f9;
+    --bj-blue: #226bff;
+    --bj-thin-blue: #5798fb;
+    /* 文字颜色 */
+    --white: #ffffff;
+    --yellow: #ff6008;
+    --main-color: #4e342e;
+    --minor-color: #6d4c41;
+    --black: #4f4f4f;
+    --thin-black: #acacac;
+    --thin-blue: #409eff;
+    --blue: #226bff;
 }
+
+/* 定义全局css */
+/* 想要全局css支持postcss插件功能 TODO */

@@ -5,6 +5,7 @@ import store from './store/index'
 import Antd from 'ant-design-vue'
 import * as R from 'ramda'
 import 'ant-design-vue/dist/antd.css'
+import './assets/styles/reset.css'
 import './assets/styles/index.css'
 
 // 通过 createApp() 方式初始Vue

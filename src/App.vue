@@ -1,25 +1,29 @@
 <template>
-  <HelloWorld msg="Hello Vue 3.0 + Vite~" />
-  <Tree />
+  <div id="app">
+    <router-view></router-view>
+    <Dialog />
+  </div>
 </template>
 
 <script lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import Tree from './components/Tree.vue'
-
+import Dialog from './components/Dialog.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld,
-    Tree
+    Dialog
   },
-  methods: {
-    getName (params: String) {
-      console.log(params)
-    }
-  },
-  created () {
-    this.getName('asue')
-  }
+  methods: {},
+  created () {}
 }
 </script>
+
+<style lang="postcss" scoped>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
