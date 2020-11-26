@@ -22,4 +22,5 @@ app.use(router).use(store).use(Antd)
 // 挂载全局属性和方法
 app.config.globalProperties.$R = R
 
+// 挂载vue根组件实例，这个方法返回的也是vue根组建实例，可以命名为vm
 app.mount('#app')

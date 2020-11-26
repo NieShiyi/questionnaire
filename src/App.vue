@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <Dialog />
+    <!-- <Dialog /> -->
   </div>
 </template>
 
 <script lang="ts">
-import Dialog from './components/Dialog.vue'
+// import Dialog from '@/components/Dialog.vue'
 export default {
   name: 'App',
   components: {
-    Dialog
+    // Dialog
   },
   methods: {},
   created () {}
@@ -24,6 +24,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 </style>
