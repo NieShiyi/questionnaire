@@ -2,21 +2,7 @@
 
 :root {
     /* 背景色 */
-    --bj-white: #ffffff;
-    --bj-black: #000000;
-    --bj-thin-black: #121212;
-    --bj-gray: #f9f9f9;
-    --bj-blue: #226bff;
-    --bj-thin-blue: #5798fb;
-    /* 文字颜色 */
-    --white: #ffffff;
-    --yellow: #ff6008;
-    --main-color: #4e342e;
-    --minor-color: #6d4c41;
-    --black: #4f4f4f;
-    --thin-black: #acacac;
-    --thin-blue: #409eff;
-    --blue: #226bff;
+    --main: #15c39a;
 }
 
 /* 定义全局css */

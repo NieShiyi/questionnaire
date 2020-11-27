@@ -9,7 +9,9 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.home{
-  color: var(--blue)
+.home {
+  line-height: calc(100vh - 152px);
+  color: var(--main);
+  font-size: 36px;
 }
 </style>

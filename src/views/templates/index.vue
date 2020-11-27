@@ -10,6 +10,11 @@
     </a-layout-header>
     <a-layout class="content">
       <a-layout-sider width="200" style="background: #fff">
+        <a-input-search v-model:value="value" placeholder="input search text" size="large" @search="onSearch">
+          <template #enterButton>
+            <a-button> Custom </a-button>
+          </template>
+        </a-input-search>
         <a-menu mode="inline" v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" :style="{ height: '100%', borderRight: 0 }">
           <a-sub-menu key="sub1">
             <template #title>
@@ -57,7 +62,7 @@ export default {
     LaptopOutlined,
     NotificationOutlined
   },
-  setup (props) {}
+  setup () {}
 }
 </script>
 

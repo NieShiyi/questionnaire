@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <!-- <Dialog /> -->
+    <AppHeader/>
+    <router-view class="container"></router-view>
+    <AppFooter/>
   </div>
 </template>
 
 <script lang="ts">
-// import Dialog from '@/components/Dialog.vue'
+import AppHeader from './components/app-header.vue'
+import AppFooter from './components/app-footer.vue'
 export default {
   name: 'App',
   components: {
-    // Dialog
+    AppHeader,
+    AppFooter
   },
   methods: {},
   created () {}
@@ -25,5 +28,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   /* margin-top: 60px; */
+}
+.container{
+  min-height: calc(100vh - 152px);
+  margin: 0 auto;
 }
 </style>

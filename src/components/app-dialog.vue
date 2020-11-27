@@ -2,7 +2,7 @@
 
 <script lang="ts">
 export default {
-  name: 'Dialog'
+  name: 'AppDialog'
 }
 </script>
 
