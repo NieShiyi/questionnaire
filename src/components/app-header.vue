@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="logo">freefly</div>
+    <router-link to="/home" class="logo">freefly</router-link>
     <ul class="menu">
       <li v-for="item in menu" :key="item.key" :class="['menu-item', { active: data.selectedMenu === item.key }]" @click="handleMenuChange(item.key)">{{ item.name }}</li>
     </ul>
@@ -58,6 +58,7 @@ $height: 64px;
     letter-spacing: 0.1rem; */
     font-size: 32px;
     margin-right: 30px;
+    cursor: pointer;
   }
   .menu {
     display: flex;

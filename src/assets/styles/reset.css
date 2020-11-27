@@ -83,21 +83,6 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    color: #cd0200;
-    text-decoration: underline
-}
-
-a:link {
-    color: #009;
-    text-decoration: underline
-}
-
-a:visited {
-    color: #800080;
-    text-decoration: underline
-}
-
 p {
     word-wrap: break-word
 }
