@@ -3,6 +3,7 @@
 :root {
     /* 背景色 */
     --main: #15c39a;
+    --light-main: #5ccab0;
 }
 
 /* 定义全局css */

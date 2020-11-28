@@ -1,20 +1,8 @@
 <template>
   <a-layout id="components-layout-demo-top-side-2">
-    <a-layout-header class="header">
-      <div class="logo" />
-      <a-menu theme="dark" mode="horizontal" v-model:selectedKeys="selectedKeys1" :style="{ lineHeight: '64px' }">
-        <a-menu-item key="1"> nav 1 </a-menu-item>
-        <a-menu-item key="2"> nav 2 </a-menu-item>
-        <a-menu-item key="3"> nav 3 </a-menu-item>
-      </a-menu>
-    </a-layout-header>
     <a-layout class="content">
-      <a-layout-sider width="200" style="background: #fff">
-        <a-input-search v-model:value="value" placeholder="input search text" size="large" @search="onSearch">
-          <template #enterButton>
-            <a-button> Custom </a-button>
-          </template>
-        </a-input-search>
+      <a-layout-sider width="200">
+        <a-input-search v-model:keyWord="data.keyWord" placeholder="输入模板关键字" @search="onSearch" />
         <a-menu mode="inline" v-model:selectedKeys="selectedKeys2" v-model:openKeys="openKeys" :style="{ height: '100%', borderRight: 0 }">
           <a-sub-menu key="sub1">
             <template #title>
@@ -45,7 +33,7 @@
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>
-      <a-layout style="padding: 0 24px 24px">
+      <a-layout>
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"> Content </a-layout-content>
       </a-layout>
     </a-layout>
@@ -53,7 +41,7 @@
 </template>
 
 <script lang="ts">
-// import { h, ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue'
 export default {
   name: 'Templates',
@@ -62,7 +50,23 @@ export default {
     LaptopOutlined,
     NotificationOutlined
   },
-  setup () {}
+  setup () {
+    const data = reactive({
+      keyWord: ''
+    })
+
+    // 按关键字搜索模板
+    const onSearch = (keyWord: string) => {
+      if (keyWord !== data.keyWord) {
+        console.log('keyWord', keyWord)
+      }
+    }
+
+    return {
+      data,
+      onSearch
+    }
+  }
 }
 </script>
 
@@ -70,9 +74,21 @@ export default {
 .header {
 }
 .content {
-  height: calc(100vh - 64px);
+  .ant-layout-sider {
+    background-color: #fff;
+    .ant-input-search {
+      width: 160px;
+      margin: 15px auto;
+    }
+    .ant-input-affix-wrapper:hover,
+    .ant-input-affix-wrapper:focus,
+    .ant-input-affix-wrapper-focused {
+      border-color: #5ccab0;
+      box-shadow: rgba(21, 195, 154, 0.24) 0px 0px 0px 2px;
+    }
+  }
   .ant-layout {
-    padding: 24px !important;
+    padding: 15px;
   }
 }
 </style>
