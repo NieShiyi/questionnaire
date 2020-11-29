@@ -14,14 +14,11 @@ export default {
 <style lang="postcss" scoped>
 .footer {
   width: 100%;
-  padding: 20px 0;
+  padding: 10px 0;
   background-color: var(--main);
   position: fixed;
   bottom: 0;
   color: #666;
   text-align: center;
-  .contact{
-      margin-top: 4px;
-  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <a-layout id="components-layout-demo-top-side-2">
     <a-layout>
-      <a-layout-sider width="200">
+      <a-layout-sider>
         <a-input-search
           v-model:keyWord="data.keyWord"
           placeholder="输入模板关键字"
@@ -107,7 +107,11 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+/* TODO */
 .ant-layout-sider {
+  width: 3000px!important;
+  flex: 0 0 300px!important;
+  max-width: none!important;
   background-color: #fff;
   .ant-input-search {
     /* width: 160px;
@@ -142,7 +146,7 @@ export default {
   }
   .questions {
     /* height: calc(100% - 170px); */
-    height: calc(100vh - 386px);
+    height: calc(100vh - 362px);
     overflow-y: scroll;
     margin-bottom: 20px;
     > p {
