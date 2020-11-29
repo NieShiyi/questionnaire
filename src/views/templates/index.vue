@@ -71,39 +71,39 @@
 </template>
 
 <script lang="ts">
-import { reactive } from "vue";
+import { reactive } from 'vue'
 import {
   UserOutlined,
   LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons-vue";
+  NotificationOutlined
+} from '@ant-design/icons-vue'
 export default {
-  name: "Templates",
+  name: 'Templates',
   components: {
     UserOutlined,
     LaptopOutlined,
-    NotificationOutlined,
+    NotificationOutlined
   },
-  setup() {
+  setup () {
     const data = reactive({
-      keyWord: "",
-      selectedKeys: ["1"],
-      openKeys: ["sub1"],
-    });
+      keyWord: '',
+      selectedKeys: ['1'],
+      openKeys: ['sub1']
+    })
 
     // 按关键字搜索模板
     const onSearch = (keyWord: string) => {
       if (keyWord !== data.keyWord) {
-        console.log("keyWord", keyWord);
+        console.log('keyWord', keyWord)
       }
-    };
+    }
 
     return {
       data,
-      onSearch,
-    };
-  },
-};
+      onSearch
+    }
+  }
+}
 </script>
 
 <style lang="postcss" scoped>
