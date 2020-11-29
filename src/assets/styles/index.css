@@ -1,9 +1,10 @@
 /* 定义全局css变量 */
 
 :root {
-    /* 背景色 */
+    /* 主题色 */
     --main: #15c39a;
     --light-main: #5ccab0;
+    --transparent-main: #15c39a14;
 }
 
 /* 定义全局css */

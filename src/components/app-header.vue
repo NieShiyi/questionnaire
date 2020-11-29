@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router';
 const APP_HEADER_MENU = [
   { key: 'templates', name: '模板库', routeName: 'Templates' },
   { key: 'key2', name: '创建问卷', routeName: '' },
@@ -24,11 +25,14 @@ export default {
   setup () {
     const menu = ref(APP_HEADER_MENU)
     const data = reactive({ selectedMenu: '' })
+    const router = useRouter();
 
-    // 切换菜单
+
+    // 切换菜单 TODO
     const handleMenuChange = (key: string) => {
       if (data.selectedMenu !== key) {
         data.selectedMenu = key
+        router.push(key)
       }
     }
 

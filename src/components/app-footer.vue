@@ -19,6 +19,7 @@ export default {
   position: fixed;
   bottom: 0;
   color: #666;
+  text-align: center;
   .contact{
       margin-top: 4px;
   }

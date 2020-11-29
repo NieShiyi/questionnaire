@@ -13,5 +13,6 @@ export default {
   line-height: calc(100vh - 152px);
   color: var(--main);
   font-size: 36px;
+  text-align: center;
 }
 </style>

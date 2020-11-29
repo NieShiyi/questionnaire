@@ -7,6 +7,7 @@ import * as R from 'ramda'
 import 'ant-design-vue/dist/antd.css'
 import './assets/styles/reset.css'
 import './assets/styles/index.css'
+import './assets/styles/antd.css'
 
 // 通过 createApp() 方式初始Vue
 const app = createApp(App)

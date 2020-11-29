@@ -53,11 +53,6 @@ li {
     list-style: none;
 }
 
-caption,
-th {
-    text-align: left;
-}
-
 h1,
 h2,
 h3,
@@ -79,6 +74,7 @@ acronym {
 }
 
 a {
+    display: block;
     color: #333;
     text-decoration: none;
 }
