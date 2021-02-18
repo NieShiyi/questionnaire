@@ -12,57 +12,19 @@
           v-model:selectedKeys="data.selectedKeys"
           v-model:openKeys="data.openKeys"
         >
-          <a-sub-menu key="sub1">
+          <a-sub-menu v-for="menu in data.templates" :key="menu.id">
             <template #title>
-              <span><user-outlined />subnav 1</span>
+              <span>{{menu.name}}</span>
             </template>
-            <a-menu-item key="1">option1</a-menu-item>
-            <a-menu-item key="2">option2</a-menu-item>
-            <a-menu-item key="3">option3</a-menu-item>
-            <a-menu-item key="4">option4</a-menu-item>
-          </a-sub-menu>
-          <a-sub-menu key="sub2">
-            <template #title>
-              <span><laptop-outlined />subnav 2</span>
-            </template>
-            <a-menu-item key="5">option5</a-menu-item>
-            <a-menu-item key="6">option6</a-menu-item>
-            <a-menu-item key="7">option7</a-menu-item>
-            <a-menu-item key="8">option8</a-menu-item>
-          </a-sub-menu>
-          <a-sub-menu key="sub3">
-            <template #title>
-              <span><notification-outlined />subnav 3</span>
-            </template>
-            <a-menu-item key="9">option9</a-menu-item>
-            <a-menu-item key="10">option10</a-menu-item>
-            <a-menu-item key="11">option11</a-menu-item>
-            <a-menu-item key="12">option12</a-menu-item>
+            <a-menu-item v-for="item in menu.children" :key="item.id" >{{item.name}}</a-menu-item>
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>
       <a-layout-content class="content">
-        <h5 class="title">大学生恋爱观调查</h5>
-        <p class="info">该问卷模板共20题，模板问题预览如下</p>
+        <h5 class="title">{{data.templateDetail.name}}</h5>
+        <p class="info">该问卷模板共{{data.templateDetail.total}}题，模板问题预览如下</p>
         <article class="questions">
-          <p>1. 你的年级是?</p>
-          <p>2. 你的性别是?</p>
-          <p>3. 你每个月的生活费用是多少元？</p>
-          <p>4. 你的生活费用来源是？</p>
-          <p>5. 你现在的感情状况是？</p>
-          <p>6. 你曾经或现在的恋爱时长是多长时间？（X日/X个月/X年）</p>
-          <p>7. 恋爱时的每月花费是多少元？</p>
-          <p>8. 你恋爱时通常会消费在哪些方面？</p>
-          <p>9. 你的父母会给你一定的恋爱花销费用吗？</p>
-          <p>10. 你觉得自己会因为恋爱消费而导致生活紧张吗？</p>
-          <p>11. 你认为金钱会影响恋人之间的关系吗？</p>
-          <p>12. 你觉得恋爱中AA制消费怎么样？</p>
-          <p>13. 你认为以下哪种说法更符合你的恋爱消费观？</p>
-          <p>16. 根据第15题，选择该地区的原因是？</p>
-          <p>17. 你对另一半的身高要求具体是多少m？（数值）</p>
-          <p>18. 你能接受另一半的恋爱次数最多是多少次？（数值）</p>
-          <p>19. 你认为大学期间情侣每天在一起多长时间合适？（X个小时）</p>
-          <p>20. 你觉得恋爱与婚姻有什么关系？</p>
+          <p v-for="item in data.templateDetail.questions" :key="item.id">{{item.index}}. {{item.title}} </p>
         </article>
         <a href="javascipt:void(0)" class="btn">使用该模板创建问卷</a>
       </a-layout-content>
@@ -72,23 +34,46 @@
 
 <script lang="ts">
 import { reactive } from 'vue'
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined
-} from '@ant-design/icons-vue'
+import { getTemplates, getTemplateDetail } from '../../api/templates'
+// interface IReqTemplates{
+//    keyWord: string
+// }
+
+// TODO
+interface IRTemplates {
+  code: number;
+  msg: string;
+  data: any;
+}
+
 export default {
   name: 'Templates',
-  components: {
-    UserOutlined,
-    LaptopOutlined,
-    NotificationOutlined
-  },
+  components: {},
   setup () {
     const data = reactive({
+      templates: [],
+      templateId: '0101',
+      templateDetail: {},
       keyWord: '',
-      selectedKeys: ['1'],
-      openKeys: ['sub1']
+      selectedKeys: [],
+      openKeys: []
+    })
+
+    // 请求可以写在onBeforeMount lifecycle hook 中
+    // 请求-获取所有模板菜单
+    getTemplates({ keyWord: data.keyWord }).then((res: IRTemplates) => {
+      console.log(res)
+      if (res.data && res.data.length) {
+        data.templates = res.data
+        data.templateId = res.data[0].id
+      }
+    })
+
+    // 请求-获取某个模板详情
+    getTemplateDetail(data.templateId).then((res: any) => {
+      if (res.data) {
+        data.templateDetail = res.data
+      }
     })
 
     // 按关键字搜索模板
@@ -102,6 +87,9 @@ export default {
       data,
       onSearch
     }
+  },
+  created () {
+    // getTemplatesReq()
   }
 }
 </script>
@@ -109,9 +97,9 @@ export default {
 <style lang="postcss" scoped>
 /* TODO */
 .ant-layout-sider {
-  width: 3000px!important;
-  flex: 0 0 300px!important;
-  max-width: none!important;
+  width: 3000px !important;
+  flex: 0 0 300px !important;
+  max-width: none !important;
   background-color: #fff;
   .ant-input-search {
     /* width: 160px;

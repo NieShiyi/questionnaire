@@ -1,8 +1,11 @@
 const path = require('path')
 function resolve (dir) {
+  console.log('path_resolve')
   return path.join(__dirname, dir)// path.join(__dirname)设置绝对路径
 }
-const baseUrl = 'https://www.fastmock.site/mock/c9158f30b6bdc106c2cd2d07130e1676' // 设置代理路径
+// const baseUrl = 'https://www.fastmock.site/mock/c9158f30b6bdc106c2cd2d07130e1676' // 设置代理路径
+
+console.log('--------into vite.config.js')
 
 module.exports = {
   // 项目部署的基础路径
@@ -116,15 +119,22 @@ module.exports = {
   // 配置 webpack-dev-server 行为。
   devServer: {
     host: '0.0.0.0', // 局域网和本地访问
-    port: 8080,
+    port: 3000,
     https: false,
-    proxy: { // string | Object
-      '/api': {
-        target: baseUrl,
-        changeOrigin: true
-      }
+    // proxy: { // string | Object
+    //   '/api': {
+    //     target: 'https://www.fastmock.site/mock/c9158f30b6bdc106c2cd2d07130e1676',
+    //     changeOrigin: true,
+    //     logLevel: 'debug'
+    //   }
+    // },
+    proxy: 'https://www.fastmock.site/mock/c9158f30b6bdc106c2cd2d07130e1676',
+    before: app => {
+      console.log('before', app)
     },
-    before: app => { }
+    after: function (app, server, compiler) {
+      console.log('after', app)
+    }
   },
 
   // 三方插件的选项
