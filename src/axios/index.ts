@@ -10,7 +10,8 @@ class Axios {
 
   constructor () {
     this.timeout = 1000
-    this.baseURL = 'https://www.fastmock.site/mock/c9158f30b6bdc106c2cd2d07130e1676'
+    // this.baseURL = 'https://www.fastmock.site/mock/c9158f30b6bdc106c2cd2d07130e1676'
+    this.baseURL = 'http://test.utools.club:40373'
     this.withCredentials = true
     this.headers = { 'Content-Type': 'application/json' }
     this.instance = this.createInstance()
@@ -41,13 +42,12 @@ class Axios {
         return Promise.reject(error)
       })
 
-    // 响应拦截器
-    this.instance.interceptors.response.use((response: AxiosResponse<any>) => { // 响应拦截器
+    // 响应拦截器 我想要取的数据要通过response.data.data才能取到，但是use方法的返回值固定是这个类型，那么我不能直接返回response.data.data TODO
+    this.instance.interceptors.response.use((response: AxiosResponse<any>): Promise<AxiosResponse<any>> => { // 响应拦截器
       if (response.status === 200) {
-        return Promise.resolve(response.data)
-      } else {
-        return Promise.reject(response)
+        return Promise.resolve(response.data.data)
       }
+      return Promise.reject(response)
     }, (error) => {
       if (error.response) { // 常见响应错误码处理
         switch (error.response.status) {

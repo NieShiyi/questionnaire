@@ -9,22 +9,29 @@
         />
         <a-menu
           mode="inline"
-          v-model:selectedKeys="data.selectedKeys"
+          v-model:selectedKeys="selectedKeys"
           v-model:openKeys="data.openKeys"
+          @click="onMenuItemClick"
         >
           <a-sub-menu v-for="menu in data.templates" :key="menu.id">
             <template #title>
-              <span>{{menu.name}}</span>
+              <span>{{ menu.name }}</span>
             </template>
-            <a-menu-item v-for="item in menu.children" :key="item.id" >{{item.name}}</a-menu-item>
+            <a-menu-item v-for="item in menu.surveyQuestionnaireList" :key="item.id">{{
+              item.title
+            }}</a-menu-item>
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>
       <a-layout-content class="content">
-        <h5 class="title">{{data.templateDetail.name}}</h5>
-        <p class="info">该问卷模板共{{data.templateDetail.total}}题，模板问题预览如下</p>
+        <h5 class="title">{{ data.templateDetail.title }}</h5>
+        <p class="info">
+          该问卷模板共{{ data.templateDetail.total}}题，模板问题预览如下
+        </p>
         <article class="questions">
-          <p v-for="item in data.templateDetail.questions" :key="item.id">{{item.index}}. {{item.title}} </p>
+          <p v-for="item in data.templateDetail.surveyQuestionOptionList" :key="item.id">
+            {{ item.sort }}. {{ item.title }}
+          </p>
         </article>
         <a href="javascipt:void(0)" class="btn">使用该模板创建问卷</a>
       </a-layout-content>
@@ -33,63 +40,98 @@
 </template>
 
 <script lang="ts">
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { getTemplates, getTemplateDetail } from '../../api/templates'
+// TODO
 // interface IReqTemplates{
 //    keyWord: string
 // }
-
-// TODO
-interface IRTemplates {
-  code: number;
-  msg: string;
-  data: any;
+// interface IRTemplates {
+//   code: number;
+//   msg: string;
+//   data: any;
+// }
+interface ITemplatesData {
+  templates: object[],
+  templateId: string,
+  // templateDetail: {
+  //   id: string,
+  //   name: string,
+  //   description: string,
+  //   total: number,
+  //   questions: object[]
+  // },
+  templateDetail: object,
+  keyWord: string,
+  openKeys: string[]
 }
 
 export default {
   name: 'Templates',
   components: {},
   setup () {
-    const data = reactive({
+    const data:ITemplatesData = reactive({
       templates: [],
-      templateId: '0101',
+      templateId: '',
       templateDetail: {},
       keyWord: '',
-      selectedKeys: [],
       openKeys: []
     })
 
-    // 请求可以写在onBeforeMount lifecycle hook 中
-    // 请求-获取所有模板菜单
-    getTemplates({ keyWord: data.keyWord }).then((res: IRTemplates) => {
-      console.log(res)
-      if (res.data && res.data.length) {
-        data.templates = res.data
-        data.templateId = res.data[0].id
-      }
-    })
+    const selectedKeys = computed(() => [data.templateId])
+
+    // 请求可以写在onBeforeMount lifecycle hook 中,也可以在这里直接调用
+    // 请求-获取所有模板菜单 TODO
+    const getTemplatesReq = () => {
+      getTemplates({ keyWord: data.keyWord }).then((res: any) => {
+        // console.log(res)
+        // const result = res.data.data
+        if (res && res.length) {
+          data.templates = res
+          const menu = res[0]
+          if (menu && menu.surveyQuestionnaireList && menu.surveyQuestionnaireList.length) {
+            data.templateId = menu.surveyQuestionnaireList[0].id
+            data.openKeys = [menu.id]
+            getTemplateDetailReq()
+          }
+        }
+      })
+    }
 
     // 请求-获取某个模板详情
-    getTemplateDetail(data.templateId).then((res: any) => {
-      if (res.data) {
-        data.templateDetail = res.data
-      }
-    })
+    const getTemplateDetailReq = () => {
+      getTemplateDetail(data.templateId).then((res: any) => {
+        if (res) {
+          data.templateDetail = res
+        }
+      })
+    }
 
     // 按关键字搜索模板
     const onSearch = (keyWord: string) => {
       if (keyWord !== data.keyWord) {
-        console.log('keyWord', keyWord)
+        data.keyWord = keyWord
+        getTemplatesReq()
       }
     }
 
+    // 点击菜单
+    const onMenuItemClick = ({ item, key, keyPath }: any) => {
+      if (key !== data.templateId) {
+        data.templateId = key
+        getTemplateDetailReq()
+      }
+    }
+
+    // 初始请求调用
+    getTemplatesReq()
+
     return {
       data,
-      onSearch
+      selectedKeys,
+      onSearch,
+      onMenuItemClick
     }
-  },
-  created () {
-    // getTemplatesReq()
   }
 }
 </script>
