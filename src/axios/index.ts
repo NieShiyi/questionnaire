@@ -11,7 +11,7 @@ class Axios {
   constructor () {
     this.timeout = 1000
     // this.baseURL = 'https://www.fastmock.site/mock/c9158f30b6bdc106c2cd2d07130e1676'
-    this.baseURL = 'http://hjwu.ga'
+    this.baseURL = '//hjwu.ga'
     this.withCredentials = true
     this.headers = { 'Content-Type': 'application/json' }
     this.instance = this.createInstance()
