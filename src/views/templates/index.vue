@@ -78,6 +78,7 @@ export default {
       openKeys: []
     })
 
+    // return a ref object, but can not revise the value manually
     const selectedKeys = computed(() => [data.templateId])
 
     // 请求可以写在onBeforeMount lifecycle hook 中,也可以在这里直接调用
